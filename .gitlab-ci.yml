@@ -1,0 +1,19 @@
+# Select what we should cache between builds
+# cache:
+#   paths:
+#     - vendor/
+
+testone:
+  before_script:
+    - composer install
+  script:
+    - composer run cs-check
+
+deployone:
+  before_script:
+    - composer install --no-dev
+    - yarn && yarn build
+    - rm -fr node_modules .scrutinizer .travis .gitignore .editorconfig .eslintrc
+  script:
+    - zip -r bundle.zip *
+
