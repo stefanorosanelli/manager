@@ -1,19 +1,23 @@
-# Select what we should cache between builds
-# cache:
-#   paths:
-#     - vendor/
+stages:
+  - test
+  - deploy
 
 testone:
+  stage: test
   before_script:
     - composer install
   script:
+    - echo $PWD
     - composer run cs-check
 
 deployone:
+  stage: deploy
   before_script:
     - composer install --no-dev
     - yarn && yarn build
     - rm -fr node_modules .scrutinizer .travis .gitignore .editorconfig .eslintrc
   script:
+    - echo $PWD
     - zip -r bundle.zip *
+  when: manual
 
