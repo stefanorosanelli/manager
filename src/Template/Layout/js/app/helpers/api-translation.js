@@ -29,12 +29,12 @@ const methods = {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
-                'accept': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-Token': BEDITA.csrfToken,
             },
             body: formData,
         };
-        return fetch(`${window.location.origin}/translate`, options)
+        return fetch(`${BEDITA.base}/translate`, options)
             .catch(error => {
                 console.error(error);
                 return error;
