@@ -135,7 +135,10 @@ class AppController extends Controller
 
         // if redirect is app webroot, return route without redirect.
         $redirect = $this->getRequest()->getUri()->getPath();
-        if ($redirect === $this->getRequest()->getAttribute('webroot')) {
+        if (
+            $redirect === $this->getRequest()->getAttribute('webroot') ||
+            $redirect === '/logout'
+        ) {
             return $route;
         }
 
