@@ -321,10 +321,9 @@ class SchemaHelper extends Helper
             return true;
         }
         $schema = (array)$this->_View->get('schema');
-        $customProps = (array)$this->_View->get('customProps');
         $schema = Hash::get($schema, sprintf('properties.%s', $field), []);
-        // empty schema or field is a custom prop, then not sortable
-        if (empty($schema) || in_array($field, $customProps)) {
+        // empty schema
+        if (empty($schema)) {
             return false;
         }
         $type = self::typeFromSchema($schema);
